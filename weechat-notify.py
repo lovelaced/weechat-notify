@@ -1,4 +1,4 @@
-#    Copyright 2013 Josh Kearney
+#    Copyright 2013 Josh Kearney <josh@jk0.org>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
