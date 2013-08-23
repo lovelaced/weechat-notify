@@ -68,7 +68,6 @@ def signal_cb(data, buffer, date, tags, displayed, highlight, prefix, message):
     else:
         return weechat.WEECHAT_RC_OK
 
-    prefix = prefix[1:-1]
     network = weechat.buffer_get_string(buffer, "localvar_server")
     channel = weechat.buffer_get_string(buffer, "localvar_channel")
 
