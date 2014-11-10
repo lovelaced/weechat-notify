@@ -19,7 +19,7 @@ import weechat
 
 SCRIPT_NAME = "weechat-notify"
 SCRIPT_AUTHOR = "Josh Kearney (jk0)"
-SCRIPT_VERSION = "0.2"
+SCRIPT_VERSION = "0.3"
 SCRIPT_LICENSE = "GPL3"
 SCRIPT_DESC = "Send Prowl or NMA notifications upon new mentions or PMs when away."
 
@@ -51,7 +51,7 @@ def send_notification(event, description):
         "description": description
     }
 
-    requests.get(endpoint, params=params)
+    requests.post(endpoint, params=params)
 
 
 def signal_cb(data, buffer, date, tags, displayed, highlight, prefix, message):
