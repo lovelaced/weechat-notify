@@ -3,6 +3,7 @@ weechat-notify - Send Prowl or NMA notifications upon new mentions or PMs when a
 
 Installation
 
+    pip install requests
     git clone git://github.com/jk0/weechat-notify.git
     ln -s ~/path/to/weechat-notify/weechat-notify.py ~/.weechat/python/autoload/
 

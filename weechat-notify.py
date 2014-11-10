@@ -19,7 +19,7 @@ import weechat
 
 SCRIPT_NAME = "weechat-notify"
 SCRIPT_AUTHOR = "Josh Kearney (jk0)"
-SCRIPT_VERSION = "0.1"
+SCRIPT_VERSION = "0.2"
 SCRIPT_LICENSE = "GPL3"
 SCRIPT_DESC = "Send Prowl or NMA notifications upon new mentions or PMs when away."
 
