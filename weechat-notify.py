@@ -19,7 +19,7 @@ import weechat
 
 SCRIPT_NAME = "weechat-notify"
 SCRIPT_AUTHOR = "Josh Kearney (jk0)"
-SCRIPT_VERSION = "0.3"
+SCRIPT_VERSION = "0.4"
 SCRIPT_LICENSE = "GPL3"
 SCRIPT_DESC = "Send Prowl or NMA notifications upon new mentions or PMs when away."
 
@@ -69,7 +69,7 @@ def signal_cb(data, buffer, date, tags, displayed, highlight, prefix, message):
     network = weechat.buffer_get_string(buffer, "localvar_server")
     channel = weechat.buffer_get_string(buffer, "localvar_channel")
 
-    if highlight == "1":
+    if str(highlight) == "1":
         send_notification(network, "[%s:%s] %s" % (channel, prefix, message))
     elif is_private:
         send_notification(network, "[%s] %s" % (prefix, message))
