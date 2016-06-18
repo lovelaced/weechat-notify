@@ -72,7 +72,10 @@ def send_notification(event, channel, prefix, message):
             "Access-Token": api_key,
         }
         data = {
-            "data-binary": {"body": message, "title:": title, "type": "note", "guid": message}
+            "body": message,
+            "title:": title,
+            "type": "note",
+            "guid": message
         }
         print headers, data, params
     else:
