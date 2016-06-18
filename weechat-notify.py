@@ -1,4 +1,5 @@
 #    Copyright 2013 Josh Kearney <josh@jk0.org>
+#    edited by lovelaced
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -18,10 +19,10 @@ import weechat
 
 
 SCRIPT_NAME = "weechat-notify"
-SCRIPT_AUTHOR = "Josh Kearney (jk0)"
+SCRIPT_AUTHOR = "Josh Kearney (jk0), lovelaced"
 SCRIPT_VERSION = "0.4"
 SCRIPT_LICENSE = "GPL3"
-SCRIPT_DESC = "Send Prowl or NMA notifications upon new mentions or PMs when away."
+SCRIPT_DESC = "Send Pushbullet, Prowl, or NMA notifications upon new mentions or PMs when away."
 
 OPTIONS = {
     "service": "",
@@ -38,6 +39,8 @@ def send_notification(event, description):
         endpoint = "https://www.notifymyandroid.com/publicapi/notify?"
     elif service == "prowl":
         endpoint = "https://api.prowlapp.com/publicapi/add?"
+    elif service == "pushbullet":
+        endpoint = "https://api.pushbullet.com/v2/pushes"
     else:
         return weechat.WEECHAT_RC_OK
 
