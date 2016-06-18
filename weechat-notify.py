@@ -16,7 +16,7 @@
 
 import requests
 import weechat
-
+import json
 
 SCRIPT_NAME = "weechat-notify"
 SCRIPT_AUTHOR = "Josh Kearney (jk0), lovelaced"
@@ -31,28 +31,57 @@ OPTIONS = {
 }
 
 
-def send_notification(event, description):
+def send_notification(event, channel, prefix, message):
     service = weechat.config_get_plugin("service")
     api_key = weechat.config_get_plugin("api_key")
-
+    params = {}
+    data = {}
     if service == "nma":
         endpoint = "https://www.notifymyandroid.com/publicapi/notify?"
+        if channel:
+            description = "[" + channel + "] " + prefix + ": " + message
+        else:
+            description = prefix + ": " + message
+        params = {
+            "apikey": api_key,
+            "application": "WeeChat",
+            "event": event,
+            "description": description
+    }
     elif service == "prowl":
         endpoint = "https://api.prowlapp.com/publicapi/add?"
+        params = {
+            "apikey": api_key,
+            "application": "WeeChat",
+            "event": event,
+            "description": description
+    }
     elif service == "pushbullet":
         endpoint = "https://api.pushbullet.com/v2/pushes"
+
+        if channel:
+            title = channel
+            message = prefix + ": " + message
+        else:
+            title = prefix
+
+        headers = {
+            "content-type": "application/json",
+        }
+        params = {
+            "Access-Token": api_key,
+        }
+        data = {
+            "data-binary": {"body": message, "title:": title, "type": "note", "guid": message}
+        }
     else:
         return weechat.WEECHAT_RC_OK
 
     if not api_key:
         return weechat.WEECHAT_RC_OK
 
-    params = {
-        "apikey": api_key,
-        "application": "WeeChat",
-        "event": event,
-        "description": description
-    }
+    if service == "pushbullet":
+        requests.post(endpoint, params=params, data=json.dumps(data), headers=headers)
 
     requests.post(endpoint, params=params)
 
