@@ -66,7 +66,7 @@ def send_notification(event, channel, prefix, message):
             title = prefix
 
         headers = {
-            "content-type": "application/json",
+            "Content-type": "application/json",
         }
         params = {
             "Access-Token": api_key,
@@ -74,6 +74,7 @@ def send_notification(event, channel, prefix, message):
         data = {
             "data-binary": {"body": message, "title:": title, "type": "note", "guid": message}
         }
+        print headers, data, params
     else:
         return weechat.WEECHAT_RC_OK
 
